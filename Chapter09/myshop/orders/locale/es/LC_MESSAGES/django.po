@@ -1,0 +1,93 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-13 20:06+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: orders/models.py:11
+msgid "first name"
+msgstr "nombre"
+
+#: orders/models.py:12
+msgid "last name"
+msgstr "apellidos"
+
+#: orders/models.py:13
+msgid "e-mail"
+msgstr "e-mail"
+
+#: orders/models.py:14
+msgid "address"
+msgstr "dirección"
+
+#: orders/models.py:15
+msgid "postal code"
+msgstr "código postal"
+
+#: orders/models.py:16
+msgid "city"
+msgstr "ciudad"
+
+#: orders/templates/orders/order/create.html:5
+#: orders/templates/orders/order/create.html:9
+msgid "Checkout"
+msgstr "Compra"
+
+#: orders/templates/orders/order/create.html:12
+msgid "Your order"
+msgstr "Tu compra"
+
+#: orders/templates/orders/order/create.html:22
+#, python-format
+msgid ""
+"\n"
+"            \"%(code)s\" (%(discount)s%% off)\n"
+"          "
+msgstr ""
+"\n"
+"            \"%(code)s\" (%(discount)s%% descuento)\n"
+"          "
+
+#: orders/templates/orders/order/create.html:29
+msgid "Total"
+msgstr "Total"
+
+#: orders/templates/orders/order/create.html:34
+msgid "Place order"
+msgstr "Realizar compra"
+
+#: orders/templates/orders/order/created.html:5
+#: orders/templates/orders/order/created.html:9
+msgid "Thank you"
+msgstr "Gracias"
+
+#: orders/templates/orders/order/created.html:10
+#, python-format
+msgid ""
+"\n"
+"    <p>Your order has been successfully completed. Your order number is "
+"<strong>%(order_id)s</strong>.</p>\n"
+"  "
+msgstr ""
+"\n"
+"    <p>Tu pedido se ha completado correctamente. El número de tu pedido es "
+"<strong>%(order_id)s</strong>.</p>\n"
+"  "
+
+#: orders/urls.py:8
+msgid "create/"
+msgstr ""
