@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div id="chat">
+  </div>
+  <div id="chat-input">
+    <input id="chat-message-input" type="text">
+    <input id="chat-message-submit" type="submit" value="Send">
+  </div>
+{% endblock %}
+
+{% block domready %}
+  var url = 'wss://' + window.location.host +
+            '/ws/chat/room/' + '{{ course.id }}/';
+  var chatSocket = new WebSocket(url);
+
+  chatSocket.onmessage = function(e) {
+    var data = JSON.parse(e.data);
+    var message = data['message'];
+
+    var dateOptions = {hour: 'numeric', minute: 'numeric', hour12: true};
+    var datetime = new Date(data['datetime']).toLocaleString('en', dateOptions);
+
+    var user = data['user'];
+    var source = (user === '{{ request.user }}') ? 'me' : 'other';
+    var name = (user === '{{ request.user }}') ? 'Me' : '{{ request.user }}';
+
+    $('#chat').append('<div class="message ' + source + '">' +
+                      '<strong>' + name + '</strong> ' +
+                      '<span class="date">' + datetime + '</span><br>' +
+                      message +
+                      '</div>');
+
+
+    $('#chat').scrollTop($('#chat')[0].scrollHeight);
+  };
+
+  chatSocket.onclose = function(e) {
+    console.error('Chat socket closed unexpectedly');
+  };
+
+  $('#chat-message-submit').click(function() {
+    var message =$('#chat-message-input').val();
+    if(message != '') {
+      // send message in JSON format
+      chatSocket.send(JSON.stringify({'message': message}));
+
+      // clear input
+      $('#chat-message-input').val('');
+
+      // return focus
+      $('#chat-message-input').focus();
+    }
+  });
+
+  $('#chat-message-input').focus();
+  $('#chat-message-input').keyup(function(e) {
+    if (e.which === 13) {
+      // submit with enter / return key
+      $('#chat-message-submit').click();
+    }
+  });
+{% endblock %}

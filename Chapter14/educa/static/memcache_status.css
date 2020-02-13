@@ -1,0 +1,49 @@
+div.cache-stats{
+    margin: 1em 0 2em 0;
+}
+
+div.cache-stats table{
+    width: 100%
+}
+
+div.cache-stats table caption {
+    text-transform: none;
+}
+
+div.cache-stats tbody {
+    display: none;
+}
+
+div.cache-stats table tbody th,
+div.cache-stats table tbody td{
+    width: 50% !important;
+}
+
+div.cache-stats table tbody th{
+    text-align: right;
+}
+
+div.cache-stats table tbody th.cache-title{
+    text-align: center;
+    font-weight: bold;
+    padding-top: 1em;
+}
+
+div.cache-graph{
+    height: 1em;
+    width: 100%;
+    background-color: #BEEE37;
+    box-shadow: .1em .1em .1em #ccc;
+}
+
+div.cache-graph.inline{
+    display: inline-block;
+    width: 180px;
+    margin-left: 2em;
+}
+
+div.cache-graph-value{
+    height: 1em;
+    background-color: #E84A2F;
+    max-width: 100%;
+}
