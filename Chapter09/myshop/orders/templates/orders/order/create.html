@@ -29,7 +29,7 @@
     <p>{% trans "Total" %}: ${{ cart.get_total_price_after_discount|floatformat:"2" }}</p>
   </div>
 
-  <form action="." method="post" class="order-form">
+  <form method="post" class="order-form">
     {{ form.as_p }}
     <p><input type="submit" value="{% trans "Place order" %}"></p>
     {% csrf_token %}

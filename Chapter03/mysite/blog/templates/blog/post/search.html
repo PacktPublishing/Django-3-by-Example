@@ -19,7 +19,7 @@
     <p><a href="{% url "blog:post_search" %}">Search again</a></p>
   {% else %}
     <h1>Search for posts</h1>
-    <form action="." method="get">
+    <form method="get">
       {{ form.as_p }}
       <input type="submit" value="Search">
     </form>
