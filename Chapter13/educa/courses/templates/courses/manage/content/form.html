@@ -18,7 +18,7 @@
   </h1>
   <div class="module">
     <h2>Course info</h2>
-    <form action="" method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data">
       {{ form.as_p }}
       {% csrf_token %}
       <p><input type="submit" value="Save content"></p>

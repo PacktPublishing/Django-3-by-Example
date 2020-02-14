@@ -6,7 +6,7 @@
   <h1>Delete course "{{ object.title }}"</h1>
 
   <div class="module">
-    <form action="" method="post">
+    <form method="post">
       {% csrf_token %}
       <p>Are you sure you want to delete "{{ object }}"?</p>
       <input type="submit" class"button" value="Confirm">
