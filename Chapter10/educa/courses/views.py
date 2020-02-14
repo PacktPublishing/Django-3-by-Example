@@ -15,14 +15,14 @@ from .forms import ModuleFormSet
 
 class OwnerMixin(object):
     def get_queryset(self):
-        qs = super(OwnerMixin, self).get_queryset()
+        qs = super().get_queryset()
         return qs.filter(owner=self.request.user)
 
 
 class OwnerEditMixin(object):
     def form_valid(self, form):
         form.instance.owner = self.request.user
-        return super(OwnerEditMixin, self).form_valid(form)
+        return super().form_valid(form)
 
 
 class OwnerCourseMixin(OwnerMixin, LoginRequiredMixin):
@@ -73,8 +73,7 @@ class CourseModuleUpdateView(TemplateResponseMixin, View):
         self.course = get_object_or_404(Course,
                                         id=pk,
                                         owner=request.user)
-        return super(CourseModuleUpdateView,
-                     self).dispatch(request, pk)
+        return super().dispatch(request, pk)
 
     def get(self, request, *args, **kwargs):
         formset = self.get_formset()
@@ -118,8 +117,7 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
             self.obj = get_object_or_404(self.model,
                                          id=id,
                                          owner=request.user)
-        return super(ContentCreateUpdateView,
-           self).dispatch(request, module_id, model_name, id)
+        return super().dispatch(request, module_id, model_name, id)
 
     def get(self, request, module_id, model_name, id=None):
         form = self.get_form(self.model, instance=self.obj)
