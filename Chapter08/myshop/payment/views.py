@@ -11,13 +11,14 @@ from orders.models import Order
 def payment_process(request):
     order_id = request.session.get('order_id')
     order = get_object_or_404(Order, id=order_id)
+    total_cost = order.get_total_cost()
 
     if request.method == 'POST':
         # retrieve nonce
         nonce = request.POST.get('payment_method_nonce', None)
         # create and submit transaction
         result = braintree.Transaction.sale({
-            'amount': '{:.2f}'.format(order.get_total_cost()),
+            'amount': f'{total_cost:.2f}',
             'payment_method_nonce': nonce,
             'options': {
                 'submit_for_settlement': True
@@ -30,8 +31,8 @@ def payment_process(request):
             order.braintree_id = result.transaction.id
             order.save()
             # create invoice e-mail
-            subject = 'My Shop - Invoice no. {}'.format(order.id)
-            message = 'Please, find attached the invoice for your recent\
+            subject = f'My Shop - Invoice no. {order.id}'
+            message = 'Please find attached the invoice for your recent\
             purchase.'
             email = EmailMessage(subject,
                                  message,
@@ -44,7 +45,7 @@ def payment_process(request):
             weasyprint.HTML(string=html).write_pdf(out,
                                                    stylesheets=stylesheets)
             # attach PDF file
-            email.attach('order_{}.pdf'.format(order.id),
+            email.attach(f'order_{order.id}.pdf',
                          out.getvalue(),
                          'application/pdf')
             # send e-mail

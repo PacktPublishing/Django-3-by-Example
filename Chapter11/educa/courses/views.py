@@ -204,7 +204,7 @@ class CourseListView(TemplateResponseMixin, View):
                            total_modules=Count('modules'))
         if subject:
             subject = get_object_or_404(Subject, slug=subject)
-            key = 'subject_{}_courses'.format(subject.id)
+            key = f'subject_{subject.id}_courses'
             courses = cache.get(key)
             if not courses:
                 courses = all_courses.filter(subject=subject)
@@ -213,7 +213,7 @@ class CourseListView(TemplateResponseMixin, View):
             courses = cache.get('all_courses')
             if not courses:
                 courses = all_courses
-                    cache.set('all_courses', courses)
+                cache.set('all_courses', courses)
         return self.render_to_response({'subjects': subjects,
                                         'subject': subject,
                                         'courses': courses})

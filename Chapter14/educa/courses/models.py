@@ -49,7 +49,7 @@ class Module(models.Model):
     order = OrderField(blank=True, for_fields=['course'])
 
     def __str__(self):
-        return '{}. {}'.format(self.order, self.title)
+        return f'{self.order}. {self.title}'
 
     class Meta:
         ordering = ['order']
@@ -90,8 +90,8 @@ class ItemBase(models.Model):
         return self.title
 
     def render(self):
-        return render_to_string('courses/content/{}.html'.format(
-                   self._meta.model_name), {'item': self})
+        return render_to_string(f'courses/content/{self._meta.model_name}.html',
+                                {'item': self})
 
 
 class Text(ItemBase):

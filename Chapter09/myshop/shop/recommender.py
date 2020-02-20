@@ -12,7 +12,7 @@ r = redis.Redis(host=settings.REDIS_HOST,
 class Recommender(object):
 
     def get_product_key(self, id):
-        return 'product:{}:purchased_with'.format(id)
+        return f'product:{id}:purchased_with'
 
     def products_bought(self, products):
         product_ids = [p.id for p in products]
@@ -35,7 +35,7 @@ class Recommender(object):
         else:
             # generate a temporary key
             flat_ids = ''.join([str(id) for id in product_ids])
-            tmp_key = 'tmp_{}'.format(flat_ids)
+            tmp_key = f'tmp_{flat_ids}'
             # multiple products, combine scores of all products
             # store the resulting sorted set in a temporary key
             keys = [self.get_product_key(id) for id in product_ids]
