@@ -79,7 +79,7 @@ def image_like(request):
             return JsonResponse({'status':'ok'})
         except:
             pass
-    return JsonResponse({'status':'ko'})
+    return JsonResponse({'status':'error'})
 
 
 @login_required
