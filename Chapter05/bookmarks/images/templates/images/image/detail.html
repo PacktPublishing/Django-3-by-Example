@@ -26,7 +26,7 @@
       {{ image.description|linebreaks }}
     </div>
     <div class="image-likes">
-      {% for user in image.users_like.all %}
+      {% for user in users_like %}
         <div>
           <img src="{{ user.profile.photo.url }}">
           <p>{{ user.first_name }}</p>
