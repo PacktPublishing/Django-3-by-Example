@@ -31,7 +31,7 @@
     <div id="subheader">
       <div class="cart">
         {% with total_items=cart|length %}
-          {% if cart|length > 0 %}
+          {% if total_items > 0 %}
             {% trans "Your cart" %}:
             <a href="{% url "cart:cart_detail" %}">
               {% blocktrans with total_items_plural=total_items|pluralize total_price=cart.get_total_price %}

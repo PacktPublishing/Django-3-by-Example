@@ -13,7 +13,7 @@
     <div id="subheader">
       <div class="cart">
         {% with total_items=cart|length %}
-          {% if cart|length > 0 %}
+          {% if total_items > 0 %}
             Your cart:
             <a href="{% url "cart:cart_detail" %}">
               {{ total_items }} item{{ total_items|pluralize }},
