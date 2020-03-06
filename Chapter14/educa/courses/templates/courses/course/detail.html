@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  {% with subject=course.subject %}
+  {% with subject=object.subject %}
     <h1>
       {{ object.title }}
     </h1>
@@ -14,8 +14,8 @@
       <p>
         <a href="{% url "course_list_subject" subject.slug %}">
         {{ subject.title }}</a>.
-        {{ course.modules.count }} modules.
-        Instructor: {{ course.owner.get_full_name }}
+        {{ object.modules.count }} modules.
+        Instructor: {{ object.owner.get_full_name }}
       </p>
       {{ object.overview|linebreaks }}
       {% if request.user.is_authenticated %}
