@@ -21,7 +21,7 @@
     var message = data.message;
 
     var dateOptions = {hour: 'numeric', minute: 'numeric', hour12: true};
-    var datetime = new Date(data['datetime']).toLocaleString('en', dateOptions);
+    var datetime = new Date(data.datetime).toLocaleString('en', dateOptions);
 
     var isMe = data.user === '{{ request.user }}';
     var source = isMe ? 'me' : 'other';
