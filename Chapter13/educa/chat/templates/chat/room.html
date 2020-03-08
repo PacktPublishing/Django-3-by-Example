@@ -18,48 +18,50 @@
 
   chatSocket.onmessage = function(e) {
     var data = JSON.parse(e.data);
-    var message = data['message'];
+    var message = data.message;
 
     var dateOptions = {hour: 'numeric', minute: 'numeric', hour12: true};
     var datetime = new Date(data['datetime']).toLocaleString('en', dateOptions);
 
-    var user = data['user'];
-    var source = (user === '{{ request.user }}') ? 'me' : 'other';
-    var name = (user === '{{ request.user }}') ? 'Me' : '{{ request.user }}';
+    var isMe = data.user === '{{ request.user }}';
+    var source = isMe ? 'me' : 'other';
+    var name = isMe ? 'Me' : data.user;
 
-    $('#chat').append('<div class="message ' + source + '">' +
-                      '<strong>' + name + '</strong> ' +
-                      '<span class="date">' + datetime + '</span><br>' +
-                      message +
-                      '</div>');
-
-
-    $('#chat').scrollTop($('#chat')[0].scrollHeight);
+    var $chat = $('#chat');
+    $chat.append('<div class="message ' + source + '">' +
+                 '<strong>' + name + '</strong> ' +
+                 '<span class="date">' + datetime + '</span><br>' +
+                 message +
+                 '</div>');
+    $chat.scrollTop($chat[0].scrollHeight);
   };
 
   chatSocket.onclose = function(e) {
     console.error('Chat socket closed unexpectedly');
   };
 
-  $('#chat-message-submit').click(function() {
-    var message =$('#chat-message-input').val();
-    if(message != '') {
+  var $input = $('#chat-message-input');
+  var $submit = $('#chat-message-submit');
+
+  $submit.click(function() {
+    var message = $input.val();
+    if(message) {
       // send message in JSON format
       chatSocket.send(JSON.stringify({'message': message}));
 
       // clear input
-      $('#chat-message-input').val('');
+      $input.val('');
 
       // return focus
-      $('#chat-message-input').focus();
+      $input.focus();
     }
   });
 
-  $('#chat-message-input').focus();
-  $('#chat-message-input').keyup(function(e) {
+  $input.focus();
+  $input.keyup(function(e) {
     if (e.which === 13) {
       // submit with enter / return key
-      $('#chat-message-submit').click();
+      $submit.click();
     }
   });
 {% endblock %}
