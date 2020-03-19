@@ -54,7 +54,7 @@ def image_detail(request, id, slug):
     # increment total image views by 1
     total_views = r.incr(f'image:{image.id}:views')
     # increment image ranking by 1
-    r.zincrby('image_ranking', image.id, 1)
+    r.zincrby('image_ranking', 1, image.id)
     return render(request,
                   'images/image/detail.html',
                   {'section': 'images',
