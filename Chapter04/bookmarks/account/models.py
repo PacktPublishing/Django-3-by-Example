@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.dispatch import receiver // Add this to use to allow social_Auth users to edit and save profile
 
 
 class Profile(models.Model):
@@ -9,3 +10,12 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'Profile for user {self.user.username}'
+
+    // This will allow social_Auth users to edit and save profiles.
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
