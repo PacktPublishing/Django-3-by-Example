@@ -28,7 +28,6 @@ def image_create(request):
         form = ImageCreateForm(data=request.POST)
         if form.is_valid():
             # form data is valid
-            cd = form.cleaned_data
             new_item = form.save(commit=False)
 
             # assign current user to the item
