@@ -12,13 +12,13 @@ from actions.utils import create_action
 from .forms import ImageCreateForm
 from .models import Image
 
-import redis
+#import redis
 from django.conf import settings
 
 # connect to redis
-r = redis.Redis(host=settings.REDIS_HOST,
-                port=settings.REDIS_PORT,
-                db=settings.REDIS_DB)
+#r = redis.Redis(host=settings.REDIS_HOST,
+#                port=settings.REDIS_PORT,
+#                db=settings.REDIS_DB)
 
 
 @login_required
