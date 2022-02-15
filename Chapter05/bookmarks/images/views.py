@@ -76,13 +76,13 @@ def image_list(request):
         # If page is not an integer deliver the first page
         images = paginator.page(1)
     except EmptyPage:
-        if request.is_ajax():
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             # If the request is AJAX and the page is out of range
             # return an empty page
             return HttpResponse('')
         # If page is out of range deliver last page of results
         images = paginator.page(paginator.num_pages)
-    if request.is_ajax():
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         return render(request,
                       'images/image/list_ajax.html',
                       {'section': 'images', 'images': images})
