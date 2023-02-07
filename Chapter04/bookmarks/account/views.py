@@ -76,6 +76,9 @@ def edit(request):
         else:
             messages.error(request, 'Error updating your profile')
     else:
+        # Get or Create the user profile to avoid erro RelatedObjectDoesNotExist
+        Profile.objects.get_or_create(user=request.user)
+
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
     return render(request,
