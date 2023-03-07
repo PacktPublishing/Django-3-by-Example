@@ -8,6 +8,8 @@ from .models import Post, Comment
 from .forms import EmailPostForm, CommentForm
 from taggit.models import Tag
 
+#import to fix the bug with new comment re-added on page refresh
+from django.http import HttpResponseRedirect
 
 def post_list(request, tag_slug=None):
     object_list = Post.published.all()
@@ -56,6 +58,10 @@ def post_detail(request, year, month, day, post):
             new_comment.post = post
             # Save the comment to the database
             new_comment.save()
+            
+            #redirect to the commented-on post's page to prevent the same comment being added over and over again on page refresh
+            return HttpResponseRedirect(post.get_absolute_url())
+          
     else:
         comment_form = CommentForm()
 
